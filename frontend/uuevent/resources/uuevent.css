@@ -1,3 +1,5 @@
 html, body { height: 100%; margin: 0; overflow: hidden; padding: 0; }
 
 #app-layout { height: 100%; }
+
+.time-line { height: 100px;}
