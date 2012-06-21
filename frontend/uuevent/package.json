@@ -1,0 +1,6 @@
+{
+    'name': 'uuevent',
+    'description': 'UI for UUEvent Project',
+    'version': 1.0,
+    'dojoBuild': 'uuevent.profile.js'
+}

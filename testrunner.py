@@ -17,7 +17,7 @@ def main(sdk_path, test_path):
     dev_appserver.fix_sys_path()
 
     #Fix sys path for Flask application
-    sys.path.insert(0, "app")
+    sys.path.insert(0, "backend")
     import main
 
     suite = unittest.loader.TestLoader().discover(test_path)
@@ -32,5 +32,5 @@ if __name__ == '__main__':
         parser.print_help()
         sys.exit(1)
     SDK_PATH = args[0]
-    TEST_PATH = os.path.join("app", "tests")
+    TEST_PATH = os.path.join("backend", "tests")
     main(SDK_PATH, TEST_PATH)

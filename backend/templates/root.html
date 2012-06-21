@@ -1,0 +1,31 @@
+<html>
+    <head>
+        <title>UUEvent</title>
+        <link rel="stylesheet" href="/frontend/dtk/dijit/themes/claro/claro.css">
+        <link rel="stylesheet" href="/frontend/dtk/dojox/grid/resources/claroGrid.css">
+        <link rel="stylesheet" href="/frontend/uuevent/resources/uuevent.css">
+        <script>
+            var dojoConfig = {
+                isDebug: true,
+                async: true,
+                baseUrl: "/frontend/",
+                tlmSiblingOfDojo: false,
+                packages: [
+                    { name: "dojo", location: "dtk/dojo" },
+                    { name: "dijit", location: "dtk/dijit" },
+                    { name: "dojox", location: "dtk/dojox" },
+                    { name: "uuevent", location: "uuevent" }
+                ]
+            };
+        </script>
+        <script type="text/javascript" src="/frontend/dtk/dojo/dojo.js"></script>
+        <script>
+            require(['uuevent', 'dojo/domReady!'], function(app) {
+                app.init();
+            });
+        </script>
+    </head>
+    <body class="claro">
+        <div id="app-layout"></div>
+    </body>
+</html>

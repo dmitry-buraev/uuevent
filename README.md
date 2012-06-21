@@ -1,4 +1,4 @@
 uuevent
 =======
 
-Ulan-Ude events 
+Ulan-Ude events

@@ -5,7 +5,7 @@ package_dir_path = os.path.join(os.path.dirname(__file__), package_dir)
 sys.path.insert(0, package_dir_path)
 
 from settings import DEBUG
-from app import app
+from backend import app
 
 def main():
     if DEBUG:
