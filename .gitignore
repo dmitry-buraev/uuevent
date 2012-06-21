@@ -27,3 +27,4 @@ pip-log.txt
 .mr.developer.cfg
 
 frontend/dtk/*
+*.sw[op]
