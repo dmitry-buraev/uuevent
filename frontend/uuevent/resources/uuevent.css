@@ -1,5 +1,36 @@
 html, body { height: 100%; margin: 0; overflow: hidden; padding: 0; }
 
-#app-layout { height: 100%; }
+#app-layout { height: 100%; max-width: 850px; min-width: 600px; margin: 0 auto; }
 
-.time-line { height: 100px;}
+.time-line { height: 50px; overflow: hidden; position: relative; }
+.time-line .main { width: 100%; height: 100%; padding: 2px; }
+.time-line .weeks { height: 45px; width: 200%; margin: 0 auto; position: absolute; }
+.time-line .weeks > div { width: 50%; height: 100%; float: left; }
+
+/* days */
+.days-wrapper { overflow: hidden; margin: 0 auto; width: 470px; }
+.day { color: #000; float: left; margin: 10px 3px 3px 3px; width: 60px; height: 35px; }
+div.day-name, .date { width: 100%; height: 30px; text-align: center; height: 50%; }
+div.day-name { background-color: #E9EDF1; font-weight: bold; border-top-left-radius: 10% 10%; 
+               border-top-right-radius: 10% 10%; -moz-border-radius-topright: 5px;
+               -moz-border-radius-topleft: 5px; -webkit-border-top-left-radius: 5px;
+               -webkit-border-top-right-radius: 5px; line-height: 20px;
+               border-bottom: 1px solid #000; }
+div.day-name:hover { background-color: #FCFCFC; }
+.date { font-size: 0.8em; display: block; }
+div.day:hover .day-name { background-color: #FAD965; }
+div.selected .day-name { background-color: #FAD965; }
+
+/* Previous and next button arrows */
+.time-line .previous,
+    .time-line .next { background-color: #E9EDF1; height: 100%; width: 20px; position: absolute;
+                      line-height: 50px; z-index: 1; }
+.time-line .previous { border-right: 1px solid #CCCCCC; left: 0; top: 0; }
+.time-line .next { border-left: 1px solid #CCCCCC; right: 0; top: 0; }
+.time-line .previous .arrow,
+    .time-line .next .arrow { margin: 10px auto; width: 0; height: 0; border-top: 15px solid transparent;
+                              border-bottom: 15px solid transparent; }
+.time-line .previous .arrow { border-right:15px solid #8E8E8E; }
+.time-line .next .arrow { border-left: 15px solid #8E8E8E; }
+.time-line .next:hover .arrow { border-left : 15px solid  #FAD965; }
+.time-line .previous:hover .arrow { border-right: 15px solid  #FAD965; }
