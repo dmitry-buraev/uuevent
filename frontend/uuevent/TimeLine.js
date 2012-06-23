@@ -10,6 +10,8 @@ define(
     'dojo/date',
     'dojo/on',
     'dojo/topic',
+    'dojo/dom',
+    'dojo/dom-class',
     'dojo/dom-construct',
     'dojo/dom-geometry',
     'dojo/dom-style',
@@ -17,7 +19,7 @@ define(
 ],
 
 function(declare, _WidgetBase, _TemplatedMixin, template, array, fx, easing,  date,
-         on, topic, domConstruct, domGeom, domStyle, domProp)
+         on, topic, dom, domClass, domConstruct, domGeom, domStyle, domProp)
 {
     return declare('uuevent.TimeLine', [_WidgetBase, _TemplatedMixin], {
         baseClass: 'time-line',
@@ -25,9 +27,12 @@ function(declare, _WidgetBase, _TemplatedMixin, template, array, fx, easing,  da
         currentWeek: 0, //0 for current week, -1 for previous, -2 and so on
         currentWeekNode: null,
 
+        currentDayNodeId: null,
+
         templateString: template,
 
         postCreate: function() {
+            var _t = this;
             var weekNode = this.constructWeekNode();
             this.currentWeekNode = weekNode;
             domConstruct.place(weekNode, this.weeksContainer);
@@ -41,9 +46,26 @@ function(declare, _WidgetBase, _TemplatedMixin, template, array, fx, easing,  da
                 if (tClass === 'day-name' || tClass === 'date') {
                     var tParent = target.parentNode,
                         selectedDate = domProp.get(tParent, 'id');
+
                     topic.publish('changeDate', selectedDate);
+
+                    var selectedDayNode = dom.byId(_t.currentDayNodeId);
+                    if (selectedDayNode) {
+                        domClass.remove(selectedDayNode, 'selected');
+                    }
+                    domClass.add(tParent, 'selected');
+
+                    _t.currentDayNodeId = domProp.get(tParent, 'id');
                 }
             });
+        },
+
+        startup: function() {
+            var todayDayNodeId = this.format_date(new Date()).date,
+                dayNode = dom.byId(todayDayNodeId);
+            this.currentDayNodeId = todayDayNodeId;
+
+            domClass.add(dayNode, 'selected');
         },
 
         onSwitchWeek: function() {
@@ -123,6 +145,11 @@ function(declare, _WidgetBase, _TemplatedMixin, template, array, fx, easing,  da
                                 <span class="date">' + day.strDate+ '</span>',
                     'class': 'day'
                 }, daysWrapper);
+
+                if (day.date === this.currentDayNodeId) {
+                    domClass.add(dayNode, 'selected');
+                }
+
             }, this);
 
             return weekNode;
