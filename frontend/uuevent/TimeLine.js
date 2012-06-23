@@ -9,13 +9,15 @@ define(
     'dojo/fx/easing',
     'dojo/date',
     'dojo/on',
+    'dojo/topic',
     'dojo/dom-construct',
     'dojo/dom-geometry',
-    'dojo/dom-style'
+    'dojo/dom-style',
+    'dojo/dom-prop'
 ],
 
 function(declare, _WidgetBase, _TemplatedMixin, template, array, fx, easing,  date,
-         on, domConstruct, domGeom, domStyle)
+         on, topic, domConstruct, domGeom, domStyle, domProp)
 {
     return declare('uuevent.TimeLine', [_WidgetBase, _TemplatedMixin], {
         baseClass: 'time-line',
@@ -29,9 +31,22 @@ function(declare, _WidgetBase, _TemplatedMixin, template, array, fx, easing,  da
             var weekNode = this.constructWeekNode();
             this.currentWeekNode = weekNode;
             domConstruct.place(weekNode, this.weeksContainer);
+
+            this.onSwitchWeek();
+
+            on(this.weeksContainer, 'click', function(evt) {
+                var target = evt.target,
+                    tClass = domProp.get(target, 'class');
+
+                if (tClass === 'day-name' || tClass === 'date') {
+                    var tParent = target.parentNode,
+                        selectedDate = domProp.get(tParent, 'id');
+                    topic.publish('changeDate', selectedDate);
+                }
+            });
         },
 
-        startup: function() {
+        onSwitchWeek: function() {
             var _t = this,
                 wCStyles = domStyle.getComputedStyle(_t.weeksContainer);
 
@@ -47,9 +62,9 @@ function(declare, _WidgetBase, _TemplatedMixin, template, array, fx, easing,  da
                     node: _t.weeksContainer,
                     properties: {
                         left: l - step,
-                        duration: 400,
                         units: 'px'
-                    }
+                    },
+                    duration: 400
                 });
 
                 on(anim, 'End', function() {
@@ -77,10 +92,10 @@ function(declare, _WidgetBase, _TemplatedMixin, template, array, fx, easing,  da
                 var anim = fx.animateProperty({
                     node: _t.weeksContainer,
                     properties: {
-                        left: l + step,
-                        duration: 400,
+                        left: left + step,
                         units: 'px'
-                    }
+                    },
+                    duration: 400
                 });
 
                 on(anim, 'End', function() {
@@ -105,7 +120,7 @@ function(declare, _WidgetBase, _TemplatedMixin, template, array, fx, easing,  da
                 var dayNode = domConstruct.create('div', {
                     id: day.date,
                     innerHTML: '<div class="day-name">' + day.dayName + '</div> \
-                                <time class="date">' + day.strDate+ '</time>',
+                                <span class="date">' + day.strDate+ '</span>',
                     'class': 'day'
                 }, daysWrapper);
             }, this);
