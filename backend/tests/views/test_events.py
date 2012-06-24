@@ -10,9 +10,9 @@ from backend.models import Event
 class EventRestTestCase(GaeFlaskTestCase):
     def test_to_dict(self):
         from backend.views.events import to_dict
-        e = Event.query(Event.name == u'Чайф').get()
+        e = Event.query(Event.watchword == u'Ундервуд в Улан-Удэ').get()
         self.assertEquals(to_dict(e), {
-            'id': e.key.id(), 'name': e.name,
+            'item_id': e.key.id(), 'watchword': e.watchword,
             'description': e.description,
             'intervals': [{
                 'start_date': i.start_date.strftime('%Y-%m-%d'),
@@ -23,14 +23,19 @@ class EventRestTestCase(GaeFlaskTestCase):
                 'end_time': i.start_time.strftime(
                     '%H:%M') if i.end_time is not None else None,
                 } for i in e.intervals],
-            'company': e.company.id(),
-            'category': [c.id() for c in e.categories],
+            'company': {
+                'id': e.company.id(), 'name': e.company.get().name},
+            'tags': [{
+                'id': c.id(), 'name': c.get().name
+                } for c in e.tags],
             });
 
     def test_get(self):
         with app.test_request_context():
             r = json.loads(EventREST().get().data)
-            self.assertEquals(len(r), 3)
-            eid = Event.query(Event.name == u'Чайф').get().key.id()
+            self.assertEquals(len(r), 4)
+            eid = Event.query(
+                    Event.watchword == u'Ундервуд в Улан-Удэ'
+                    ).get().key.id()
             r = json.loads(EventREST().get(eid).data)
-            self.assertEquals(r['name'], u'Чайф')
+            self.assertEquals(r['watchword'], u'Ундервуд в Улан-Удэ')

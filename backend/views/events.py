@@ -1,7 +1,8 @@
+from google.appengine.ext import ndb
 from flask import json, jsonify, Response
 from flask.views import MethodView
 from backend import app
-from backend.models import Event
+from backend.models import Event, Tag
 from settings import DATE_FORMAT as DF, TIME_FORMAT as TF
 
 class EventREST(MethodView):
@@ -21,7 +22,7 @@ app.add_url_rule('/events/<id>', view_func=event_view,
 
 def to_dict(o):
     return {
-        'id': o.key.id(), 'name': o.name,
+        'item_id': o.key.id(), 'watchword': o.watchword,
         'description': o.description,
         'intervals': [{
             'start_date': i.start_date.strftime(DF),
@@ -32,6 +33,9 @@ def to_dict(o):
             'end_time': i.start_time.strftime(TF
                 ) if i.end_time is not None else None,
             } for i in o.intervals],
-        'company': o.company.id(),
-        'category': [c.id() for c in o.categories],
+        'company': { 'id': o.company.id(), 'name': o.company.get().name },
+        'tags': [{
+            'id': t.key.id(),
+            'name': t.name
+            } for t in ndb.get_multi(o.tags)],
         }

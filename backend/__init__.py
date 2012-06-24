@@ -13,4 +13,5 @@ from .views import events
 
 
 #for dev
+#from backend.tests import GaeFlaskTestCase
 #GaeFlaskTestCase.init_test_db()

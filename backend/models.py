@@ -31,7 +31,7 @@ class Company(ndb.Model):
     name = ndb.StringProperty(required=True)
     employers = ndb.KeyProperty('User', repeated=True)
 
-class Category(ndb.Model):
+class Tag(ndb.Model):
     name = ndb.StringProperty(required=True)
 
 class Interval(ndb.Model):
@@ -41,8 +41,8 @@ class Interval(ndb.Model):
     end_time = ndb.TimeProperty()
 
 class Event(ndb.Model):
-    name = ndb.StringProperty(required=True)
+    watchword = ndb.StringProperty(required=True)
     description = ndb.StringProperty()
     intervals = ndb.StructuredProperty(Interval, repeated=True)
     company = ndb.KeyProperty('Company')
-    categories = ndb.KeyProperty('Category', repeated=True)
+    tags = ndb.KeyProperty('Tag', repeated=True)
