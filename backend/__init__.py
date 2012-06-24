@@ -9,7 +9,7 @@ app.config.from_object('settings')
 def root():
     return render_template('root.html')
 
-from .views import events
+from .views import events, tags
 
 
 #for dev

@@ -1,9 +1,9 @@
 define(
 [
-    'dijit/layout/BorderContainer',
     'uuevent/TimeLine',
     'uuevent/EventList',
     'uuevent/AsideBar',
+    'uuevent/TagCloud',
     'dojo/store/JsonRest',
     'dojo/_base/window',
     'dojo/dom-construct',
@@ -11,29 +11,28 @@ define(
     'dojo/topic'
 ],
 
-function(BorderContainer, TimeLine, EventList, AsideBar, JsonRest, win,
+function(TimeLine, EventList, AsideBar, TagCloud, JsonRest, win,
          domConstruct, domStyle, topic)
 {
     var app = {
         init: function() {
-            var layout = new BorderContainer({
-                design: 'headline'
-            }, 'app-layout');
+            var timeLine = new TimeLine({ region: 'top' }, 'time-line');
+            timeLine.startup();
 
-            var timeLine = new TimeLine({ region: 'top' });
-            layout.addChild(timeLine);
+            var tagStore = JsonRest({ target: '/tags/' });
+            var tagCloud = new TagCloud({
+                store: tagStore
+            }, 'tag-cloud');
+            tagCloud.startup();
 
             var eventStore = JsonRest({ target: '/events/' });
             var eventList = new EventList({
-                region: 'center',
                 store: eventStore
-            });
-            layout.addChild(eventList);
+            }, 'event-list');
+            eventList.startup();
 
-            var asideBar = new AsideBar({ region: 'right'  });
-            layout.addChild(asideBar);
-
-            layout.startup();
+            var asideBar = new AsideBar({}, 'aside-bar');
+            asideBar.startup();
 
             this.constructLED();
         },

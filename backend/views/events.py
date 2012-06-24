@@ -1,5 +1,5 @@
 from google.appengine.ext import ndb
-from flask import json, jsonify, Response, request, abort
+from flask import json, Response, request, abort
 from flask.views import MethodView
 from backend import app
 from backend.models import Event, Tag

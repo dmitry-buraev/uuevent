@@ -1,8 +1,7 @@
-html, body { height: 100%; margin: 0; padding: 0; }
+html, body { height: 100%; margin: 0; padding: 0; max-width: 850px; min-width: 600px; margin: 0 auto; }
 
-#app-layout { height: 100%; max-width: 850px; min-width: 600px; margin: 0 auto; }
-
-.time-line { height: 50px; overflow: hidden; position: relative; }
+.time-line { height: 50px; overflow: hidden; position: relative; border: 1px solid #D1C8C8; margin: 2px 0;
+             -moz-border-radius: 3px; -webkit-border-radius: 3px; }
 .time-line .main { width: 100%; height: 100%; padding: 2px; }
 .time-line .weeks { height: 45px; width: 200%; margin: 0 auto; position: absolute; }
 .time-line .weeks > div { width: 50%; height: 100%; float: left; }
@@ -36,12 +35,14 @@ div.selected .day-name { background-color: #FAD965; }
 .time-line .previous:hover .arrow { border-right: 15px solid  #FAD965; }
 
 /* EventList */
-.event-list { }
-
+.event-list { float: left; width: 66%; min-height: 70%; border-left: 1px solid #D1C8C8; border-top: 1px solid #D1C8C8;
+              -webkit-border-top-left-radius: 5px; -moz-border-radius-topleft: 5px; }
+.event-list .hover { border-color: #F1CA68; }
+.event-list .hover { border-color: #F1CA68; }
 
 /* AsideBar */
-.aside-bar { width: 40%; }
-
+.aside-bar { float: right; width: 32%; min-height: 70%; border-top: 1px solid #D1C8C8; border-right: 1px solid #D1C8C8;
+             -webkit-border-top-right-radius: 5px; -moz-border-radius-topright: 5px; }
 
 /* Event */
 .event-short { border-bottom: 1px solid #B5BCC7; margin: 0 5px; overflow: hidden; }
@@ -53,7 +54,10 @@ div.selected .day-name { background-color: #FAD965; }
 .event-short .info .tags > div { float: left; padding: 2px; text-transform: lowercase; font-weight: bold;
                                  font-size: 0.8em; background-color: #8E8E8E; margin: 0 2px; color: #FFF;
                                  -moz-border-radius: 3px; -webkit-border-radius: 3px; }
-.event-list .hover { border-color: #F1CA68; }
+/* TagCloud */
+.tag-cloud { overflow: hidden; }
+.tag-cloud > div { float: left; padding: 2px; margin: 5px; text-transform: lowercase; background-color: #E6F1F6;
+                                 -moz-border-radius: 3px; -webkit-border-radius: 3px; }
 
 
 /* LED */
@@ -62,3 +66,8 @@ div.selected .day-name { background-color: #FAD965; }
        z-index: 100; -moz-border-radius-bottomright: 5px; -moz-border-radius-bottomleft: 5px; 
        -webkit-border-bottom-right-radius: 5px; -webkit-border-bottom-left-radius: 5px;
        display: none; }
+
+/* Info bar */
+#info-bar { -moz-border-radius: 3px; -webkit-border-radius: 3px;
+            font-size: 0.8em, font-weight: bold; text-align: center;
+            border: 1px solid #D1C8C8; margin: 5px 0; }
