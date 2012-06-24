@@ -1,4 +1,4 @@
-html, body { height: 100%; margin: 0; overflow: hidden; padding: 0; }
+html, body { height: 100%; margin: 0; padding: 0; }
 
 #app-layout { height: 100%; max-width: 850px; min-width: 600px; margin: 0 auto; }
 
@@ -34,3 +34,14 @@ div.selected .day-name { background-color: #FAD965; }
 .time-line .next .arrow { border-left: 15px solid #8E8E8E; }
 .time-line .next:hover .arrow { border-left : 15px solid  #FAD965; }
 .time-line .previous:hover .arrow { border-right: 15px solid  #FAD965; }
+
+/* EventList */
+.event-list { }
+
+
+/* AsideBar */
+.aside-bar { width: 40%; }
+
+
+/* Event */
+.event { }

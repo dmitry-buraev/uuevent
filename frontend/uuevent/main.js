@@ -1,10 +1,13 @@
 define(
 [
     'dijit/layout/BorderContainer',
-    'uuevent/TimeLine'
+    'uuevent/TimeLine',
+    'uuevent/EventList',
+    'uuevent/AsideBar',
+    'dojo/store/JsonRest'
 ],
 
-function(BorderContainer, TimeLine)
+function(BorderContainer, TimeLine, EventList, AsideBar, JsonRest)
 {
     var app = {
         init: function() {
@@ -12,7 +15,18 @@ function(BorderContainer, TimeLine)
                 design: 'headline'
             }, 'app-layout');
 
-            layout.addChild(new TimeLine({ region: 'top' }));
+            var timeLine = new TimeLine({ region: 'top' });
+            layout.addChild(timeLine);
+
+            var eventStore = JsonRest({ target: '/events/' });
+            var eventList = new EventList({
+                region: 'center',
+                store: eventStore
+            });
+            layout.addChild(eventList);
+
+            var asideBar = new AsideBar({ region: 'right'  });
+            layout.addChild(asideBar);
 
             layout.startup();
         }
