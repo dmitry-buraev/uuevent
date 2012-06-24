@@ -32,9 +32,11 @@ function(declare, _WidgetBase, _Container, _TemplatedMixin, template, array,
             });
 
             topic.subscribe('changeDate', function(dateText) {
+                topic.publish('startLoading');
                 _t.store.query({date: dateText}).then(function(res) {
                     _t.removeEvents();
                     _t.constructEvents(res);
+                    topic.publish('endLoading');
                 }, function(err) {
                     console.error(err);
                 });
