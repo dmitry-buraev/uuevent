@@ -1,14 +1,18 @@
 from google.appengine.ext import ndb
-from flask import json, jsonify, Response
+from flask import json, jsonify, Response, request, abort
 from flask.views import MethodView
 from backend import app
 from backend.models import Event, Tag
+from datetime import date
 from settings import DATE_FORMAT as DF, TIME_FORMAT as TF
 
 class EventREST(MethodView):
     def get(self, id=None):
         if id is None:
-            events = Event.query().fetch()
+            d = request.args.get('date', date.today().strftime(DF)).split('-')
+            dt = date(int(d[0]), int(d[1]), int(d[2]))
+            events = Event.query(
+                    Event.intervals.start_date == dt).fetch()
             res = [to_dict(e) for e in events]
         else:
             res = to_dict(Event.get_by_id(id))
