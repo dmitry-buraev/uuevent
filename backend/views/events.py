@@ -11,13 +11,13 @@ class EventREST(MethodView):
         if id is None:
             d = request.args.get('date', date.today().strftime(DF)).split('-')
             dt = date(int(d[0]), int(d[1]), int(d[2]))
-            tagid = request.args.get('tag')
-            if tagid:
-                tagkey = ndb.Key('Tag', int(tagid))
+            tagids = request.args.getlist('tags')
+            if tagids:
+                tagkeys = [ndb.Key('Tag', int(id)) for id in tagids]
                 events = Event.query(
                         ndb.AND(
                             Event.intervals.start_date == dt,
-                            Event.tags == tagkey
+                            Event.tags.IN(tagkeys)
                             )
                         ).fetch()
             else:

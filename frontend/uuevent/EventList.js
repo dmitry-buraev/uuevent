@@ -30,6 +30,8 @@ function(declare, _WidgetBase, _Container, _TemplatedMixin, template, array,
             return res;
         })(), //FIXME
 
+        currentTagIds: [],
+
         postCreate: function() {
             var _t = this,
                 event;
@@ -39,12 +41,12 @@ function(declare, _WidgetBase, _Container, _TemplatedMixin, template, array,
 
             topic.subscribe('changeDate', function(dateText) {
                 _t.currentDate = dateText;
-                _t.updateEvents({ 'date': dateText });
+                _t.updateEvents({ 'date': dateText, 'tags': _t.currentTagIds });
             });
 
-            topic.subscribe('selectedTag', function(id) {
-                console.log(_t.currentDate);
-                _t.updateEvents({ 'date': _t.currentDate, 'tag': id });
+            topic.subscribe('clickedTag', function(tagIds) {
+                _t.updateEvents({ 'date': _t.currentDate, 'tags': tagIds });
+                _t.currentTagIds = tagIds;
             });
         },
 

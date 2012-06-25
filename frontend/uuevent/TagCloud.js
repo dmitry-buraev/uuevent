@@ -23,7 +23,7 @@ function(declare, _WidgetBase, _TemplatedMixin, template, array,
 
         templateString: template,
 
-        selectedTagNode: null,
+        selectedTagNodes: [],
 
         postCreate: function() {
             var _t = this;
@@ -34,22 +34,38 @@ function(declare, _WidgetBase, _TemplatedMixin, template, array,
             });
 
             on(this.domNode, 'click', function(evt) {
-                var target = evt.target,
-                    tClass = domProp.get(target, 'class');
-                if (tClass && tClass === 'tag') {
-                    var tag_id = domProp.get(target, 'tag_id');
-                    _t.selectTag(target);
-                    topic.publish('selectedTag', tag_id);
+                var target = evt.target;
+                if (target.parentNode === _t.containerNode) {
+                    var tagIds = _t.getSelectedTagIds(target);
+                    topic.publish('clickedTag', tagIds);
                 }
             });
         },
 
-        selectTag: function(tag) {
-            if (this.selectedTagNode) {
-                domClass.remove(this.selectedTagNode, 'selected');
+        getSelectedTagIds: function(tag) {
+            var _t = this,
+                sTags = this.selectedTagNodes,
+                tIndex = array.indexOf(sTags, tag);
+
+            function markTag() {
+                sTags.push(tag);
+                domClass.add(tag, 'selected');
             }
-            domClass.add(tag, 'selected');
-            this.selectedTagNode = tag;
+
+            function unmarkTag() {
+                _t.selectedTagNodes = array.filter(sTags, function(t) {
+                    return t.innerHTML !== tag.innerHTML;
+                });
+                domClass.remove(tag, 'selected');
+            }
+            if (tIndex === -1) {
+                markTag();
+            } else {
+                unmarkTag();
+            }
+            return array.map(_t.selectedTagNodes, function(t) {
+                    return domProp.get(t, 'tag_id');
+                });
         },
 
         constructTags: function(tags) {
