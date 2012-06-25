@@ -73,11 +73,16 @@ div.selected .day-name { background-color: #FCE09F; }
 
 /* TagCloud */
 .tag-cloud { overflow: hidden; }
-.tag-cloud > div { float: left; padding: 2px; margin: 5px; text-transform: lowercase;
+.tag-cloud .tag { float: left; padding: 2px; margin: 5px; text-transform: lowercase;
                    background-color: #E6F1F6; font-size: 0.8em;
                    -moz-border-radius: 3px; -webkit-border-radius: 3px; }
-.tag-cloud .tag:hover { background-color: #FCE09F; }
-.tag-cloud .selected { background-color: #FCE09F; }
+.tag-cloud > div.selected { background-color: #FCE09F; }
+
+.tag-cloud .all { float: left; padding: 2px; margin: 5px; text-transform: uppercase;
+                  background-color: #E6F1F6; font-size: 0.9em; padding: 3px;
+                  -moz-border-radius: 3px; -webkit-border-radius: 3px; }
+
+.tag-cloud > div:hover { background-color: #FCE09F; }
 
 /* LED */
 #LED { position: absolute; top: 0; left: 50%; width: 10em; margin: -3px 0 0 -5em;

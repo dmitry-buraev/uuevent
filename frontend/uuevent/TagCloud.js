@@ -35,9 +35,16 @@ function(declare, _WidgetBase, _TemplatedMixin, template, array,
 
             on(this.domNode, 'click', function(evt) {
                 var target = evt.target;
-                if (target.parentNode === _t.containerNode) {
+                if (domClass.contains(target, 'tag')) {
                     var tagIds = _t.getSelectedTagIds(target);
                     topic.publish('clickedTag', tagIds);
+                } else if (domClass.contains(target, 'all')) {
+                    array.forEach(_t.selectedTagNodes, function(tagNode) {
+                        domClass.remove(tagNode, 'selected');
+                    });
+                    domClass.add(target, 'selected');
+                    _t.selectedTagNodes = [];
+                    topic.publish('clickedTag', []);
                 }
             });
         },
@@ -50,6 +57,9 @@ function(declare, _WidgetBase, _TemplatedMixin, template, array,
             function markTag() {
                 sTags.push(tag);
                 domClass.add(tag, 'selected');
+                if (domClass.contains(_t.allTag, 'selected')) {
+                    domClass.remove(_t.allTag, 'selected');
+                }
             }
 
             function unmarkTag() {
@@ -57,6 +67,10 @@ function(declare, _WidgetBase, _TemplatedMixin, template, array,
                     return t.innerHTML !== tag.innerHTML;
                 });
                 domClass.remove(tag, 'selected');
+
+                if (_t.selectedTagNodes.length === 0) {
+                    domClass.add(_t.allTag, 'selected');
+                }
             }
             if (tIndex === -1) {
                 markTag();
@@ -69,6 +83,13 @@ function(declare, _WidgetBase, _TemplatedMixin, template, array,
         },
 
         constructTags: function(tags) {
+            var all = domConstruct.create('div', {
+                'class': 'all selected',
+                innerHTML: 'ВСЕ'
+            }, this.containerNode);
+
+            this.allTag = all;
+
             array.forEach(tags, function(tag) {
                 var tagNode = domConstruct.create('div', {
                     'class': 'tag',
