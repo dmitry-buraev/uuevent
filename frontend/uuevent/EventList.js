@@ -11,16 +11,18 @@ define(
     'dojo/dom',
     'dojo/dom-construct',
 
-    'uuevent/Event'
+    'uuevent/EventShort',
+    'uuevent/EventFull'
 ],
 
 function(declare, _WidgetBase, _Container, _TemplatedMixin, template, array,
-         on, topic, dom, domConstruct, Event)
+         on, topic, dom, domConstruct, EventShort, EventFull)
 {
     return declare('uuevent.EventList', [_WidgetBase, _TemplatedMixin, _Container], {
         baseClass: 'event-list',
 
         store: null,
+        tagStore: null,
 
         templateString: template,
 
@@ -45,8 +47,33 @@ function(declare, _WidgetBase, _Container, _TemplatedMixin, template, array,
             });
 
             topic.subscribe('clickedTag', function(tagIds) {
-                _t.updateEvents({ 'date': _t.currentDate, 'tags': tagIds });
                 _t.currentTagIds = tagIds;
+                _t.updateEvents({ 'date': _t.currentDate, 'tags': tagIds });
+            });
+
+            topic.subscribe('clickedEvent', function(eventId) {
+                _t.removeEvents();
+                _t.constructEventFull(eventId);
+            });
+
+            topic.subscribe('backToList', function() {
+                _t.removeEvents();
+                _t.updateEvents({ 'date': _t.currentDate, 'tags': _t.currentTagIds});
+            });
+        },
+
+        constructEventFull: function(id) {
+            var _t = this;
+            this.store.get(id).then(function(res) {
+                var tags = [];
+                array.forEach(res.tags, function(tagId) {
+                    var tag = this.tagStore.get(tagId);
+                    tags.push(tag);
+                }, _t);
+
+                res.tags = tags;
+                var eventFull = new EventFull(res);
+                _t.addChild(eventFull);
             });
         },
 
@@ -63,10 +90,21 @@ function(declare, _WidgetBase, _Container, _TemplatedMixin, template, array,
         },
 
         constructEvents: function(events) {
-            array.forEach(events, function(evt) {
-                event = new Event(evt);
-                this.addChild(event);
-            }, this);
+            if (events.length > 0) {
+                array.forEach(events, function(event) {
+                    var tags = [];
+                    array.forEach(event.tags, function(tagId) {
+                        var tag = this.tagStore.get(tagId);
+                        tags.push(tag);
+                    }, this);
+
+                    event.tags = tags;
+                    eventShort = new EventShort(event);
+                    this.addChild(eventShort);
+                }, this);
+            } else {
+                console.log('No events');
+            }
         },
 
         removeEvents: function() {

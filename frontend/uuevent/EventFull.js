@@ -3,7 +3,7 @@ define(
     'dojo/_base/declare',
     'dijit/_WidgetBase',
     'dijit/_TemplatedMixin',
-    'dojo/text!./templates/Event.html',
+    'dojo/text!./templates/EventFull.html',
     'dojo/_base/array',
     'dojo/on',
     'dojo/mouse',
@@ -16,8 +16,8 @@ define(
 function(declare, _WidgetBase, _TemplatedMixin, template, array,
          on, mouse, topic, dom, domConstruct, domClass)
 {
-    return declare('uuevent.Event', [_WidgetBase, _TemplatedMixin], {
-        baseClass: 'event-short',
+    return declare('uuevent.EventShort', [_WidgetBase, _TemplatedMixin], {
+        baseClass: 'event-full',
 
         templateString: template,
 
@@ -35,12 +35,8 @@ function(declare, _WidgetBase, _TemplatedMixin, template, array,
                 }, this.tagsNode);
             }, this);
 
-            on(this.domNode, mouse.enter, function(evt) {
-                domClass.add(this, 'hover');
-            });
-
-            on(this.domNode, mouse.leave, function(evt) {
-                domClass.remove(this, 'hover');
+            on(this.back, 'click', function(evt) {
+                topic.publish('backToList');
             });
         }
     });

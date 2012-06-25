@@ -5,13 +5,15 @@ define(
     'uuevent/AsideBar',
     'uuevent/TagCloud',
     'dojo/store/JsonRest',
+    'dojo/store/Memory',
+    'dojo/store/Cache',
     'dojo/_base/window',
     'dojo/dom-construct',
     'dojo/dom-style',
     'dojo/topic'
 ],
 
-function(TimeLine, EventList, AsideBar, TagCloud, JsonRest, win,
+function(TimeLine, EventList, AsideBar, TagCloud, JsonRest, Memory, Cache, win,
          domConstruct, domStyle, topic)
 {
     var app = {
@@ -21,7 +23,7 @@ function(TimeLine, EventList, AsideBar, TagCloud, JsonRest, win,
             var timeLine = new TimeLine({ region: 'top' }, 'time-line');
             timeLine.startup();
 
-            var tagStore = JsonRest({ target: '/tags/' });
+            var tagStore = Cache(JsonRest({ target: '/tags/' }), Memory());
             var tagCloud = new TagCloud({
                 store: tagStore
             }, 'tag-cloud');
@@ -29,7 +31,8 @@ function(TimeLine, EventList, AsideBar, TagCloud, JsonRest, win,
 
             var eventStore = JsonRest({ target: '/events/' });
             var eventList = new EventList({
-                store: eventStore
+                store: eventStore,
+                tagStore: tagStore
             }, 'event-list');
             eventList.startup();
 

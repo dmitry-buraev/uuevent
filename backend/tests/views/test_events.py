@@ -23,11 +23,8 @@ class EventRestTestCase(GaeFlaskTestCase):
                 'end_time': i.start_time.strftime(
                     '%H:%M') if i.end_time is not None else None,
                 } for i in e.intervals],
-            'company': {
-                'id': e.company.id(), 'name': e.company.get().name},
-            'tags': [{
-                'id': c.id(), 'name': c.get().name
-                } for c in e.tags],
+            'company': e.company.id(),
+            'tags': [ c.id() for c in e.tags],
             });
 
     def test_get(self):

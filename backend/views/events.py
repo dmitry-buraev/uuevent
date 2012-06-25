@@ -26,7 +26,7 @@ class EventREST(MethodView):
 
             res = [to_dict(e) for e in events]
         else:
-            res = to_dict(Event.get_by_id(id))
+            res = to_dict(Event.get_by_id(int(id)))
         return Response(json.dumps(res), mimetype='application/json')
 
 event_view = EventREST.as_view('event_rest')
@@ -48,9 +48,6 @@ def to_dict(o):
             'end_time': i.start_time.strftime(TF
                 ) if i.end_time is not None else None,
             } for i in o.intervals],
-        'company': { 'id': o.company.id(), 'name': o.company.get().name },
-        'tags': [{
-            'id': t.key.id(),
-            'name': t.name
-            } for t in ndb.get_multi(o.tags)],
+        'company': o.company.id(),
+        'tags': [ t.id() for t in o.tags ],
         }
