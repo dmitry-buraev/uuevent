@@ -34,14 +34,13 @@ div.selected .day-name { background-color: #FCE09F; }
 .time-line .previous:hover .arrow { border-right: 15px solid  #FAD965; }
 
 /* EventList */
-.event-list { float: left; width: 66%; min-height: 70%; border-left: 1px solid #D1C8C8;
+.event-list { float: left; width: 66%; min-height: 85%; border-left: 1px solid #D1C8C8;
               -webkit-border-top-left-radius: 5px; -moz-border-radius-topleft: 5px;
               border-top: 1px solid #D1C8C8; }
 .event-list .hover { border-color: #F1CA68; }
 
 /* AsideBar */
-.aside-bar { border-top: 1px solid #D1C8C8; border-right: 1px solid #D1C8C8;
-             -webkit-border-top-right-radius: 5px; -moz-border-radius-topright: 5px;
+.aside-bar { border-top: 1px solid #D1C8C8;
              float: right; width: 32%; min-height: 70%; }
 /* Event */
 .event-short { border-bottom: 1px solid #B5BCC7; margin: 0 5px; overflow: hidden; }
@@ -72,6 +71,5 @@ div.selected .day-name { background-color: #FCE09F; }
        display: none; }
 
 /* Info bar */
-#info-bar { -moz-border-radius: 3px; -webkit-border-radius: 3px;
-            font-size: 0.8em; font-weight: bold; text-align: center;
-            border: 1px solid #D1C8C8; margin: 5px 0; }
+#info-bar { font-size: 0.8em; font-weight: bold; text-align: center;
+            border-top: 1px solid #D1C8C8; margin: 5px 0; }

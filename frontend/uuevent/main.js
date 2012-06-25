@@ -16,6 +16,8 @@ function(TimeLine, EventList, AsideBar, TagCloud, JsonRest, win,
 {
     var app = {
         init: function() {
+            this.constructLED();
+
             var timeLine = new TimeLine({ region: 'top' }, 'time-line');
             timeLine.startup();
 
@@ -34,7 +36,6 @@ function(TimeLine, EventList, AsideBar, TagCloud, JsonRest, win,
             var asideBar = new AsideBar({}, 'aside-bar');
             asideBar.startup();
 
-            this.constructLED();
         },
 
         constructLED: function() {
