@@ -1,7 +1,7 @@
-html, body { height: 100%; margin: 0; padding: 0; max-width: 850px; min-width: 600px; margin: 0 auto; }
+html, body { height: 100%; max-width: 850px; min-width: 600px; margin: 0 auto; padding: 0; }
 
-.time-line { height: 50px; overflow: hidden; position: relative; border: 1px solid #D1C8C8; margin: 2px 0;
-             -moz-border-radius: 3px; -webkit-border-radius: 3px; }
+.time-line { height: 50px; overflow: hidden; position: relative; border: 1px solid #D1C8C8;
+             margin: 2px 0; -moz-border-radius: 3px; -webkit-border-radius: 3px; }
 .time-line .main { width: 100%; height: 100%; padding: 2px; }
 .time-line .weeks { height: 45px; width: 200%; margin: 0 auto; position: absolute; }
 .time-line .weeks > div { width: 50%; height: 100%; float: left; }
@@ -10,7 +10,7 @@ html, body { height: 100%; margin: 0; padding: 0; max-width: 850px; min-width: 6
 .days-wrapper { overflow: hidden; margin: 0 auto; width: 470px; }
 .day { color: #000; float: left; margin: 10px 3px 3px 3px; width: 60px; height: 35px; }
 div.day-name, .date { width: 100%; height: 30px; text-align: center; height: 50%; }
-div.day-name { background-color: #E9EDF1; font-weight: bold; border-top-left-radius: 10% 10%; 
+div.day-name { background-color: #E6F1F6; font-weight: bold; border-top-left-radius: 10% 10%;
                border-top-right-radius: 10% 10%; -moz-border-radius-topright: 5px;
                -moz-border-radius-topleft: 5px; -webkit-border-top-left-radius: 5px;
                -webkit-border-top-right-radius: 5px; line-height: 20px;
@@ -26,48 +26,51 @@ div.selected .day-name { background-color: #FAD965; }
                       line-height: 50px; z-index: 1; }
 .time-line .previous { border-right: 1px solid #CCCCCC; left: 0; top: 0; }
 .time-line .next { border-left: 1px solid #CCCCCC; right: 0; top: 0; }
-.time-line .previous .arrow,
-    .time-line .next .arrow { margin: 10px auto; width: 0; height: 0; border-top: 15px solid transparent;
-                              border-bottom: 15px solid transparent; }
+.time-line .arrow,
+    .time-line .arrow { border-top: 15px solid transparent; border-bottom: 15px solid transparent;
+                              margin: 10px auto; width: 0; height: 0; }
 .time-line .previous .arrow { border-right:15px solid #8E8E8E; }
 .time-line .next .arrow { border-left: 15px solid #8E8E8E; }
 .time-line .next:hover .arrow { border-left : 15px solid  #FAD965; }
 .time-line .previous:hover .arrow { border-right: 15px solid  #FAD965; }
 
 /* EventList */
-.event-list { float: left; width: 66%; min-height: 70%; border-left: 1px solid #D1C8C8; border-top: 1px solid #D1C8C8;
-              -webkit-border-top-left-radius: 5px; -moz-border-radius-topleft: 5px; }
-.event-list .hover { border-color: #F1CA68; }
+.event-list { float: left; width: 66%; min-height: 70%; border-left: 1px solid #D1C8C8;
+              -webkit-border-top-left-radius: 5px; -moz-border-radius-topleft: 5px;
+              border-top: 1px solid #D1C8C8; }
 .event-list .hover { border-color: #F1CA68; }
 
 /* AsideBar */
-.aside-bar { float: right; width: 32%; min-height: 70%; border-top: 1px solid #D1C8C8; border-right: 1px solid #D1C8C8;
-             -webkit-border-top-right-radius: 5px; -moz-border-radius-topright: 5px; }
-
+.aside-bar { border-top: 1px solid #D1C8C8; border-right: 1px solid #D1C8C8;
+             -webkit-border-top-right-radius: 5px; -moz-border-radius-topright: 5px;
+             float: right; width: 32%; min-height: 70%; }
 /* Event */
 .event-short { border-bottom: 1px solid #B5BCC7; margin: 0 5px; overflow: hidden; }
 .event-short .company-logo { float: left; padding: 5% 5px; }
-.event-short .company-logo img { vertical-align: middle; width: 2.5em;  height: 2.5em; border: medium none; padding: 10% 0;}
-.event-short .info { float: left; padding: 2% 0; width: 85%; }
+.event-short .company-logo img { vertical-align: middle; width: 2.5em;  height: 2.5em;
+                                 border: medium none; padding: 10% 0;}
+.event-short .info { float: left; padding: 4% 0; width: 85%; }
 .event-short .info .intervals { overflow: hidden; }
 .event-short .info .intervals > div { float: left; padding: 2px; font-size: .8em; }
-.event-short .info .tags > div { float: left; padding: 2px; text-transform: lowercase; font-weight: bold;
-                                 font-size: 0.8em; background-color: #8E8E8E; margin: 0 2px; color: #FFF;
-                                 -moz-border-radius: 3px; -webkit-border-radius: 3px; }
-/* TagCloud */
-.tag-cloud { overflow: hidden; }
-.tag-cloud > div { float: left; padding: 2px; margin: 5px; text-transform: lowercase; background-color: #E6F1F6;
+.event-short .info .tags > div { float: left; padding: 2px; text-transform: lowercase;
+                                 font-weight: bold; font-size: 0.8em;
+                                 background-color: #8E8E8E; margin: 0 2px; color: #FFF;
                                  -moz-border-radius: 3px; -webkit-border-radius: 3px; }
 
+/* TagCloud */
+.tag-cloud { overflow: hidden; }
+.tag-cloud > div { float: left; padding: 2px; margin: 5px; text-transform: lowercase;
+                   background-color: #E6F1F6; font-size: 0.8em;
+                   -moz-border-radius: 3px; -webkit-border-radius: 3px; }
 
 /* LED */
 #LED { position: absolute; top: 0; left: 50%; width: 10em; margin: -3px 0 0 -5em;
        height: 1.3em; background-color: #FAD965; text-align: center; font-size: 0.8em;
-       z-index: 100; -moz-border-radius-bottomright: 5px; -moz-border-radius-bottomleft: 5px; 
+       z-index: 100; -moz-border-radius-bottomright: 5px; -moz-border-radius-bottomleft: 5px;
        -webkit-border-bottom-right-radius: 5px; -webkit-border-bottom-left-radius: 5px;
        display: none; }
 
 /* Info bar */
 #info-bar { -moz-border-radius: 3px; -webkit-border-radius: 3px;
-            font-size: 0.8em, font-weight: bold; text-align: center;
+            font-size: 0.8em; font-weight: bold; text-align: center;
             border: 1px solid #D1C8C8; margin: 5px 0; }
