@@ -37,7 +37,7 @@ function(declare, _WidgetBase, _Container, _TemplatedMixin, template, array,
         postCreate: function() {
             var _t = this,
                 event;
-            this.store.query().then(function(res) {
+            this.store.query({ 'date': _t.currentDate }).then(function(res) {
                 _t.constructEvents(res);
             });
 

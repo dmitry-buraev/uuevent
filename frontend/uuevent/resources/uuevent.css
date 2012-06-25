@@ -43,7 +43,8 @@ div.selected .day-name { background-color: #FCE09F; }
 .aside-bar { border-top: 1px solid #D1C8C8;
              float: right; width: 32%; min-height: 70%; }
 /* Event */
-.event-short { border-bottom: 1px solid #B5BCC7; margin: 0 5px; overflow: hidden; }
+.event-short { border-bottom: 1px solid #B5BCC7; margin: 0 5px; overflow: hidden;
+               position: relative;}
 .event-short .company-logo { float: left; padding: 5% 5px; }
 .event-short .company-logo img { vertical-align: middle; width: 2.5em;  height: 2.5em;
                                  border: medium none; padding: 10% 0;}
@@ -54,19 +55,30 @@ div.selected .day-name { background-color: #FCE09F; }
                                  font-weight: bold; font-size: 0.8em;
                                  background-color: #8E8E8E; margin: 0 2px; color: #FFF;
                                  -moz-border-radius: 3px; -webkit-border-radius: 3px; }
+.event-short .info .tags > div:hover { color: #FCE09F; }
 
+.event-short .button { position: absolute; top: 50%; right: 0; width: 2em; height:3.4em;
+                       background-color: #E9EDF1; margin-top: -1.5em;
+                       -moz-border-radius: 3px; -webkit-border-radius: 3px; }
+.event-short .button .arrow { width: 0; height: 0; border-top: 1.5em solid transparent;
+                       border-bottom: 1.5em solid transparent; border-left: 1.3em solid #8E8E8E;
+                       margin: 0.2em auto; }
+.event-short .button:hover .arrow { border-left: 1.3em solid #FCE09F; };
 
 /* EventFull */
 .event-full { margin: 5px; }
-.event-full .back {  margin: 5px 0 10px 2px; overflow: hidden; height: 20px; line-height: 20px;
-                     background-color: #E6F1F6; text-align: center; font-size: 0.9em; }
+.event-full .back {  margin: 5px 0 10px 2px; overflow: hidden; height: 2em; line-height: 2em;
+                     text-align: center; font-size: 0.9em;
+                     background-color: #E9EDF1;
+                     -moz-border-radius: 3px; -webkit-border-radius: 3px; }
 .event-full .back > div { float: left; margin-right: 3px; }
-.event-full .back > div.text { background-color: #E6F1F6; height: 10px; }
-.event-full .back .arrow { border-top: 10px solid transparent; border-bottom: 10px solid transparent;
-                           width: 0; height: 0; border-right:10px solid #8E8E8E; }
+.event-full .back > div.text { background-color: #E6F1F6; height: 2em; }
+.event-full .back .arrow { border-top: 0.8em solid transparent; border-bottom: 0.8em solid transparent;
+                           width: 0; height: 0; border-right: 0.8em solid #8E8E8E; 
+                           margin: 0.2em 0.4em; }
+.event-full .back:hover .arrow { border-right: 0.8em solid  #FCE09F; }
+
 .event-full .back .text {  }
-
-
 
 .event-full .event-image { float: left; }
 .event-full .event-image img { width: 15em; margin: 0 5px 5px 0; }

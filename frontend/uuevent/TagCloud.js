@@ -7,6 +7,7 @@ define(
     'dojo/_base/array',
     'dojo/on',
     'dojo/topic',
+    'dojo/dom',
     'dojo/dom-construct',
     'dojo/dom-prop',
     'dojo/dom-class',
@@ -14,7 +15,7 @@ define(
 ],
 
 function(declare, _WidgetBase, _TemplatedMixin, template, array,
-         on, topic, domConstruct, domProp, domClass, CheckBox)
+         on, topic, dom, domConstruct, domProp, domClass, CheckBox)
 {
     return declare('uuevent.TagCloud', [_WidgetBase, _TemplatedMixin], {
         baseClass: 'tag-cloud',
@@ -46,6 +47,18 @@ function(declare, _WidgetBase, _TemplatedMixin, template, array,
                     _t.selectedTagNodes = [];
                     topic.publish('clickedTag', []);
                 }
+            });
+
+            topic.subscribe('clickedTagInEvent', function(id) {
+                topic.publish('clickedTag', [id]);
+                array.forEach(_t.selectedTagNodes, function(tagNode) {
+                    domClass.remove(tagNode, 'selected');
+                });
+                domClass.remove(_t.allTag, 'selected');
+
+                var tagNode = dom.byId('tag' + id);
+                domClass.add(tagNode, 'selected');
+                _t.selectedTagNodes.push(tagNode);
             });
         },
 
@@ -92,6 +105,7 @@ function(declare, _WidgetBase, _TemplatedMixin, template, array,
 
             array.forEach(tags, function(tag) {
                 var tagNode = domConstruct.create('div', {
+                    id: 'tag' + tag.id,
                     'class': 'tag',
                     innerHTML: tag.name
                 }, this.containerNode);
