@@ -15,10 +15,9 @@ div.day-name { background-color: #E6F1F6; font-weight: bold; border-top-left-rad
                -moz-border-radius-topleft: 5px; -webkit-border-top-left-radius: 5px;
                -webkit-border-top-right-radius: 5px; line-height: 20px;
                border-bottom: 1px solid #000; }
-div.day-name:hover { background-color: #FCFCFC; }
 .date { font-size: 0.8em; display: block; }
-div.day:hover .day-name { background-color: #FAD965; }
-div.selected .day-name { background-color: #FAD965; }
+div.day:hover .day-name { background-color: #FCE09F; }
+div.selected .day-name { background-color: #FCE09F; }
 
 /* Previous and next button arrows */
 .time-line .previous,
@@ -62,6 +61,8 @@ div.selected .day-name { background-color: #FAD965; }
 .tag-cloud > div { float: left; padding: 2px; margin: 5px; text-transform: lowercase;
                    background-color: #E6F1F6; font-size: 0.8em;
                    -moz-border-radius: 3px; -webkit-border-radius: 3px; }
+.tag-cloud .tag:hover { background-color: #FCE09F; }
+.tag-cloud .selected { background-color: #FCE09F; }
 
 /* LED */
 #LED { position: absolute; top: 0; left: 50%; width: 10em; margin: -3px 0 0 -5em;

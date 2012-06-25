@@ -6,15 +6,15 @@ define(
     'dojo/text!./templates/TagCloud.html',
     'dojo/_base/array',
     'dojo/on',
-    'dojo/mouse',
     'dojo/topic',
-    'dojo/dom',
     'dojo/dom-construct',
-    'dojo/dom-class'
+    'dojo/dom-prop',
+    'dojo/dom-class',
+    'dijit/form/CheckBox'
 ],
 
 function(declare, _WidgetBase, _TemplatedMixin, template, array,
-         on, mouse, topic, dom, domConstruct, domClass)
+         on, topic, domConstruct, domProp, domClass, CheckBox)
 {
     return declare('uuevent.TagCloud', [_WidgetBase, _TemplatedMixin], {
         baseClass: 'tag-cloud',
@@ -23,6 +23,8 @@ function(declare, _WidgetBase, _TemplatedMixin, template, array,
 
         templateString: template,
 
+        selectedTagNode: null,
+
         postCreate: function() {
             var _t = this;
             this.store.query().then(function(res) {
@@ -30,13 +32,35 @@ function(declare, _WidgetBase, _TemplatedMixin, template, array,
             }, function(err) {
                 console.error(err);
             });
+
+            on(this.domNode, 'click', function(evt) {
+                var target = evt.target,
+                    tClass = domProp.get(target, 'class');
+                if (tClass && tClass === 'tag') {
+                    var tag_id = domProp.get(target, 'tag_id');
+                    _t.selectTag(target);
+                    topic.publish('selectedTag', tag_id);
+                }
+            });
+        },
+
+        selectTag: function(tag) {
+            if (this.selectedTagNode) {
+                domClass.remove(this.selectedTagNode, 'selected');
+            }
+            domClass.add(tag, 'selected');
+            this.selectedTagNode = tag;
         },
 
         constructTags: function(tags) {
             array.forEach(tags, function(tag) {
-                domConstruct.create('div', {
+                var tagNode = domConstruct.create('div', {
+                    'class': 'tag',
                     innerHTML: tag.name
                 }, this.containerNode);
+
+                domProp.set(tagNode, 'tag_id', tag.id);
+
             }, this);
         }
     });
