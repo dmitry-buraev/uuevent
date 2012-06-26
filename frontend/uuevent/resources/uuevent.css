@@ -38,6 +38,12 @@ div.selected .day-name { background-color: #FCE09F; }
               -webkit-border-top-left-radius: 5px; -moz-border-radius-topleft: 5px;
               border-top: 1px solid #D1C8C8; }
 .event-list .hover { border-color: #F1CA68; }
+.event-list .tags > div { float: left; padding: 2px; text-transform: lowercase;
+                                 font-weight: bold; font-size: 0.8em;
+                                 background-color: #8E8E8E; margin: 0 2px; color: #FFF;
+                                 -moz-border-radius: 3px; -webkit-border-radius: 3px; }
+.event-list .tags > div:hover { color: #FCE09F; }
+
 
 /* AsideBar */
 .aside-bar { border-top: 1px solid #D1C8C8;
@@ -51,22 +57,16 @@ div.selected .day-name { background-color: #FCE09F; }
 .event-short .info { float: left; padding: 4% 0; width: 85%; }
 .event-short .info .intervals { overflow: hidden; }
 .event-short .info .intervals > div { float: left; padding: 2px; font-size: .8em; }
-.event-short .info .tags > div { float: left; padding: 2px; text-transform: lowercase;
-                                 font-weight: bold; font-size: 0.8em;
-                                 background-color: #8E8E8E; margin: 0 2px; color: #FFF;
-                                 -moz-border-radius: 3px; -webkit-border-radius: 3px; }
-.event-short .info .tags > div:hover { color: #FCE09F; }
-
 .event-short .button { position: absolute; top: 50%; right: 0; width: 2em; height:3.4em;
                        background-color: #E9EDF1; margin-top: -1.5em;
                        -moz-border-radius: 3px; -webkit-border-radius: 3px; }
 .event-short .button .arrow { width: 0; height: 0; border-top: 1.5em solid transparent;
                        border-bottom: 1.5em solid transparent; border-left: 1.3em solid #8E8E8E;
                        margin: 0.2em auto; }
-.event-short .button:hover .arrow { border-left: 1.3em solid #FCE09F; };
+.event-short .button:hover .arrow { border-left: 1.3em solid #FCE09F; }
 
 /* EventFull */
-.event-full { margin: 5px; }
+.event-full { margin: 5px; overflow: hidden; }
 .event-full .back {  margin: 5px 0 10px 2px; overflow: hidden; height: 2em; line-height: 2em;
                      text-align: center; font-size: 0.9em;
                      background-color: #E9EDF1;
@@ -80,8 +80,16 @@ div.selected .day-name { background-color: #FCE09F; }
 
 .event-full .back .text {  }
 
+.event-full h1 { margin: 0; padding: 0; font-size: 1.2em; }
+
 .event-full .event-image { float: left; }
-.event-full .event-image img { width: 15em; margin: 0 5px 5px 0; }
+.event-full .event-image img { width: 12em; margin: 0 5px 5px 0; }
+
+.event-full .intervals-wrapper { float: right; }
+.event-full .intervals > div { margin-right: 0.2em; }
+.event-full .tags-wrapper {clear: both; overflow: hidden; }
+.event-full .label { text-align: right; font-size: 0.8em; }
+.event-full .tags { margin: 0.2em 0 1em; float: right; }
 
 /* TagCloud */
 .tag-cloud { overflow: hidden; }

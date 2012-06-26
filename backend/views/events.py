@@ -45,7 +45,7 @@ def to_dict(o):
                 ) if i.start_time is not None else None,
             'end_date': i.start_date.strftime(DF
                 ) if i.end_date is not None else None,
-            'end_time': i.start_time.strftime(TF
+            'end_time': i.end_time.strftime(TF
                 ) if i.end_time is not None else None,
             } for i in o.intervals],
         'company': o.company.id(),
