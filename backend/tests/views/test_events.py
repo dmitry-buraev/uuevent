@@ -30,7 +30,7 @@ class EventRestTestCase(GaeFlaskTestCase):
     def test_get(self):
         with app.test_request_context():
             r = json.loads(EventREST().get().data)
-            self.assertEquals(len(r), 1)
+            self.assertEquals(len(r), 17)
             eid = Event.query(
                     Event.watchword == u'Ундервуд в Улан-Удэ'
                     ).get().key.id()

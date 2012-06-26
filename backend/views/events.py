@@ -24,7 +24,7 @@ class EventREST(MethodView):
                 events = Event.query(
                         Event.intervals.start_date == dt).fetch()
 
-            res = [to_dict(e) for e in events]
+            res = [to_dict(e, dt) for e in events]
         else:
             res = to_dict(Event.get_by_id(int(id)))
         return Response(json.dumps(res), mimetype='application/json')
@@ -35,7 +35,7 @@ app.add_url_rule('/events/', view_func=event_view, methods=['POST',])
 app.add_url_rule('/events/<id>', view_func=event_view,
         methods=['GET', 'PUT', 'DELETE'])
 
-def to_dict(o):
+def to_dict(o, dt=None):
     return {
         'item_id': o.key.id(), 'watchword': o.watchword,
         'description': o.description,
@@ -47,7 +47,8 @@ def to_dict(o):
                 ) if i.end_date is not None else None,
             'end_time': i.end_time.strftime(TF
                 ) if i.end_time is not None else None,
-            } for i in o.intervals],
+            } for i in o.intervals if (
+                (i.start_date == dt) if dt is not None else True)], #FIXME: It's ugly
         'company': o.company.id(),
         'tags': [ t.id() for t in o.tags ],
         }

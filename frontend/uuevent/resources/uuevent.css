@@ -86,10 +86,12 @@ div.selected .day-name { background-color: #FCE09F; }
 .event-full .event-image img { width: 12em; margin: 0 5px 5px 0; }
 
 .event-full .intervals-wrapper { float: right; }
-.event-full .intervals > div { margin-right: 0.2em; }
+.event-full .intervals  div { text-align: right; }
+.event-full .intervals > div { font-size: 0.8em; font-weight: bold; }
+.event-full .intervals  .time { font-size: 1.1em; font-weight: normal; }
 .event-full .tags-wrapper {clear: both; overflow: hidden; }
-.event-full .label { text-align: right; font-size: 0.8em; }
-.event-full .tags { margin: 0.2em 0 1em; float: right; }
+.event-full .label { margin-top: 1em; text-align: right; font-size: 0.8em; }
+.event-full .tags { margin: 0 0.2em 0 1em; float: right; }
 
 /* TagCloud */
 .tag-cloud { overflow: hidden; }
