@@ -70,6 +70,12 @@ class GaeFlaskTestCase(unittest.TestCase):
                 description=u'Продолжение легендарной трилогии',
                 intervals = [
                     Interval(
+                        start_date=dt.date.today(),
+                        start_time=dt.time(10, 30),
+                        end_date=dt.date.today() + dt.timedelta(1),
+                        end_time=dt.time(12, 30),
+                        ),
+                    Interval(
                         start_date=dt.date.today() + dt.timedelta(1),
                         start_time=dt.time(10, 30),
                         end_date=dt.date.today() + dt.timedelta(1),
@@ -93,7 +99,23 @@ class GaeFlaskTestCase(unittest.TestCase):
                         end_date=dt.date.today() + dt.timedelta(1),
                         end_time=dt.time(00, 30),
                         ),
+                    Interval(
+                        start_date=dt.date.today() + dt.timedelta(2),
+                        start_time=dt.time(10, 30),
+                        end_date=dt.date.today() + dt.timedelta(1),
+                        end_time=dt.time(12, 30),
+                        ),
                         ])
         e4.company = com2
         e4.tags.append(tag4)
         e4.put()
+
+        for i in range(15):
+            e = Event(watchword=u'Концерт ' + unicode(i) ,
+                    description=u'Описание концерта',
+                    intervals = [Interval(
+                        start_date=dt.date.today(),
+                        start_time=dt.time(10, 30))])
+            e.company = com1
+            e.tags.append(tag1)
+            e.put()
