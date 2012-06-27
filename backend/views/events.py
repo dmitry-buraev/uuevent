@@ -9,9 +9,12 @@ from settings import DATE_FORMAT as DF, TIME_FORMAT as TF
 class EventREST(MethodView):
     def get(self, id=None):
         if id is None:
-            d = request.args.get('date', date.today().strftime(DF)).split('-')
+            args = request.args
+            count = int(args.get('count', 15))
+            offset = int(args.get('offset', 0))
+            d = args.get('date', date.today().strftime(DF)).split('-')
             dt = date(int(d[0]), int(d[1]), int(d[2]))
-            tagids = request.args.getlist('tags')
+            tagids = args.getlist('tags')
             if tagids:
                 tagkeys = [ndb.Key('Tag', int(id)) for id in tagids]
                 events = Event.query(
@@ -22,9 +25,12 @@ class EventREST(MethodView):
                         ).fetch()
             else:
                 events = Event.query(
-                        Event.intervals.start_date == dt).fetch()
+                        Event.intervals.start_date == dt).fetch(
+                                count+1, offset=offset)
 
-            res = [to_dict(e, dt) for e in events]
+            r = [to_dict(e, dt) for e in events]
+            more = len(r) > count#Flag shows there are more results to display
+            res = { 'more': more, 'events': r[:-1] if more else r }
         else:
             res = to_dict(Event.get_by_id(int(id)))
         return Response(json.dumps(res), mimetype='application/json')

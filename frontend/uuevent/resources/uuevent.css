@@ -44,11 +44,17 @@ div.selected .day-name { background-color: #FCE09F; }
                                  -moz-border-radius: 3px; -webkit-border-radius: 3px; }
 .event-list .tags > div:hover { color: #FCE09F; }
 
+.event-list .more { margin: 1em auto; background-color: #E9EDF1; width: 50%; height: 1.5em; padding-top: 0.4em;
+                    -moz-border-radius: 5px; -webkit-border-radius: 5px; position: relative; display: none; }
+.event-list .more .arrow { border-right: 2.2em solid transparent; border-left: 2.2em solid transparent;
+                           border-top: 1.2em solid #8E8E8E; width: 0; height: 0; margin: 0 auto; }
+.event-list .more:hover .arrow { border-top: 1.2em solid #FAD965; }
+
 
 /* AsideBar */
 .aside-bar { border-top: 1px solid #D1C8C8;
              float: right; width: 32%; min-height: 70%; }
-/* Event */
+/* EventShort */
 .event-short { border-bottom: 1px solid #B5BCC7; margin: 0 5px; overflow: hidden;
                position: relative;}
 .event-short .company-logo { float: left; padding: 5% 5px; }
