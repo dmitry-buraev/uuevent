@@ -51,9 +51,10 @@ div.selected .day-name { background-color: #FCE09F; }
 .event-list .more:hover .arrow { border-top: 1.2em solid #FAD965; }
 
 
-/* AsideBar */
-.aside-bar { border-top: 1px solid #D1C8C8;
+/* CompanyList */
+.company-list { border-top: 1px solid #D1C8C8;
              float: right; width: 32%; min-height: 70%; }
+
 /* EventShort */
 .event-short { border-bottom: 1px solid #B5BCC7; margin: 0 5px; overflow: hidden;
                position: relative;}

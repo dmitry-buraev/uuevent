@@ -34,8 +34,8 @@ class GaeFlaskTestCase(unittest.TestCase):
         tag2 = Tag(name=u'Блюз-рок').put()
         tag3 = Tag(name=u'Психоделический-рок').put()
         tag4 = Tag(name=u'Кино').put()
-        com1 = Company(name=u'Рассвет', employers=[u1]).put()
-        com2 = Company(name=u'Прогресс').put()
+        com1 = Company(name=u'Рассвет', employers=[u1], tags=[tag1, tag2, tag3, tag4]).put()
+        com2 = Company(name=u'Прогресс', tags=[tag4]).put()
 
         e1 = Event(watchword=u'Ундервуд в Улан-Удэ',
                 description=u'Первый концерт группы в городе',

@@ -2,7 +2,7 @@ define(
 [
     'uuevent/TimeLine',
     'uuevent/EventList',
-    'uuevent/AsideBar',
+    'uuevent/CompanyList',
     'uuevent/TagCloud',
     'dojo/store/JsonRest',
     'dojo/store/Memory',
@@ -13,7 +13,7 @@ define(
     'dojo/topic'
 ],
 
-function(TimeLine, EventList, AsideBar, TagCloud, JsonRest, Memory, Cache, win,
+function(TimeLine, EventList, CompanyList, TagCloud, JsonRest, Memory, Cache, win,
          domConstruct, domStyle, topic)
 {
     var app = {
@@ -36,8 +36,11 @@ function(TimeLine, EventList, AsideBar, TagCloud, JsonRest, Memory, Cache, win,
             }, 'event-list');
             eventList.startup();
 
-            var asideBar = new AsideBar({}, 'aside-bar');
-            asideBar.startup();
+            var companyStore = Cache(JsonRest({ target: '/companies/' }), Memory());
+            var companyList = new CompanyList({
+                store: companyStore
+            }, 'company-list');
+            companyList.startup();
 
         },
 

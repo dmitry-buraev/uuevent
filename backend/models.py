@@ -27,12 +27,14 @@ class User(ndb.Model):
     def check_password(self, passw):
         return self.password == self.gen_password(self.salt, passw)
 
-class Company(ndb.Model):
-    name = ndb.StringProperty(required=True)
-    employers = ndb.KeyProperty('User', repeated=True)
 
 class Tag(ndb.Model):
     name = ndb.StringProperty(required=True)
+
+class Company(ndb.Model):
+    name = ndb.StringProperty(required=True)
+    employers = ndb.KeyProperty('User', repeated=True)
+    tags = ndb.KeyProperty('Tag', repeated=True)
 
 class Interval(ndb.Model):
     start_date = ndb.DateProperty(required=True)
